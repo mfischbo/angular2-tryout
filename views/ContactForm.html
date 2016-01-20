@@ -1,0 +1,100 @@
+<form (ngSubmit)="onFormSubmit()">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" class="form-control" [(ngModel)]="contact.firstName">
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name:</label>
+    <input type="text" class="form-control" [(ngModel)]="contact.lastName">
+  </div>
+
+  <div class="form-group">
+    <label for="birthday">Birthday</label>
+    <input type="date" class="form-control" [(ngModel)]="contact.birthday">
+  </div>
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#addresses" data-toggle="tab">Addresses</a></li>
+    <li> <a href="#phone" data-toggle="tab">Phone Numbers</a></li>
+    <li> <a href="#email" data-toggle="tab">E-Mails</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="addresses">
+
+      <h5>Addresses</h5>
+      <div class="row" *ngFor="#e of contact.addresses">
+        <div class="col-md-12">
+          <div class="form-group">
+              <label for="label">Label</label>
+              <input type="text" class="form-control" [(ngModel)]="e.label">
+          </div>
+          <div class="form-group">
+              <label for="street">Street</label>
+              <input type="text" class="form-control" [(ngModel)]="e.street">
+          </div>
+          <div class="form-group col-md-3">
+              <label for="zipcode">Zip Code</label>
+              <input class="form-control" [(ngModel)]="e.zipcode">
+          </div>
+          <div class="form-group col-md-9">
+              <label for="city">City</label>
+              <input class="form-control" [(ngModel)]="e.city">
+          </div>
+          <div class="form-group">
+              <label for="country">Country</label>
+              <select class="form-control" [(ngModel)]="e.country">
+                <option value="DE">Germany</option>
+                <option value="EN">United Kingdom</option>
+                <option value="FR">France</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-danger" (click)="removeAddress(e)">- Delete</button>
+            <button type="button" class="btn" (click)="addAddress()">+ Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="phone">
+      <div class="row" *ngFor="#e of contact.phoneNumbers">
+        <div class="form-group col-md-3">
+          <label for="label">Label</label>
+          <input type="text" class="form-control" [(ngModel)]="e.label">
+        </div>
+        <div class="form-group col-md-9">
+          <label for="address">E-Mail</label>
+          <input type="text" class="form-control" [(ngModel)]="e.number">
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-danger" (click)="removePhone(e)">- Delete</button>
+          <button type="button" class="btn" (click)="addEmail()">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="email">
+      <div class="row" *ngFor="#e of contact.emailAddresses">
+        <div class="form-group col-md-3">
+          <label for="label">Label</label>
+          <input type="text" class="form-control" [(ngModel)]="e.label">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="EMail">E-Mail Address</label>
+          <input type="email" class="form-control" [(ngModel)]="e.address">
+        </div>
+
+        <div class="col-md-3">
+          <button type="button" class="btn btn-danger" (click)="removeEmail(e)">- Delete</button>
+          <button type="button" class="btn" (click)="addEmail()">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button class="btn btn-primary" type="submit">Create</button>
+</form>
